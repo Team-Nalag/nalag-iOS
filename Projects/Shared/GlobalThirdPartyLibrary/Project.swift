@@ -10,8 +10,8 @@ let project = Project.module(
             product: .framework,
             dependencies: 
                 [
-                    .SPM.KeychainSwift,
-                    .SPM.Moya,
+//                    .SPM.KeychainSwift,
+//                    .SPM.Moya,
                     .SPM.ComposableArchitecture
                 ]
         )
