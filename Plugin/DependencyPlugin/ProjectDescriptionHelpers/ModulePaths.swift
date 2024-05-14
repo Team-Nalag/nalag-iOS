@@ -45,6 +45,8 @@ public extension ModulePaths {
 
 public extension ModulePaths {
     enum Shared: String, MicroTargetPathConvertable {
+        case Router
+        case ViewUtil
         case GlobalThirdPartyLibrary
     }
 }
