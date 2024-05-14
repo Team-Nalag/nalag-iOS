@@ -4,6 +4,8 @@ import RootFeature
 import RootFeatureInterface
 import HomeFeature
 import HomeFeatureInterface
+import SplashFeature
+import SplashFeatureInterface
 
 public final class AppComponent: BootstrapComponent {
 //    private let _keychain: any Keychain
@@ -30,5 +32,9 @@ public final class AppComponent: BootstrapComponent {
 public extension AppComponent {
     var homeFactory: any HomeFactory {
         HomeComponent(parent: self)
+    }
+
+    var splashFactory: any SplashFactory {
+        SplashComponent(parent: self)
     }
 }
