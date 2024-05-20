@@ -22,7 +22,6 @@ public struct HomeView: View {
                         color: (back: .Main.main50, tint: .white),
                         text: "퀴즈 풀기"
                     ) {
-                        
                     }
 
                     NalagButton(
