@@ -3,6 +3,7 @@ import BaseFeature
 import HomeFeatureInterface
 import SplashFeatureInterface
 import ViewUtil
+import DesignSystem
 
 struct RootView: View {
     @AppState var appState
@@ -34,7 +35,7 @@ struct RootView: View {
                         .environmentObject(appState)
                 }
             }
-            .background(Color.white.ignoresSafeArea())
+            .background(Color.Main.main5.ignoresSafeArea())
             .animation(.easeInOut, value: appState.sceneFlow)
             .transition(.opacity.animation(.easeInOut))
         }

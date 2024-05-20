@@ -1,10 +1,12 @@
 
 
+import ComposableArchitecture
 import HomeFeature
 import HomeFeatureInterface
 import NeedleFoundation
 import RootFeature
 import RootFeatureInterface
+import SplashFeature
 import SplashFeatureInterface
 import SwiftUI
 
@@ -21,9 +23,23 @@ private func parent1(_ component: NeedleFoundation.Scope) -> NeedleFoundation.Sc
 
 #if !NEEDLE_DYNAMIC
 
+private class SplashDependencye0cb7136f2ec3edfd60aProvider: SplashDependency {
+
+
+    init() {
+
+    }
+}
+/// ^->AppComponent->SplashComponent
+private func factoryace9f05f51d68f4c0677e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return SplashDependencye0cb7136f2ec3edfd60aProvider()
+}
 private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
     var homeFactory: any HomeFactory {
         return appComponent.homeFactory
+    }
+    var splashFactory: any SplashFactory {
+        return appComponent.splashFactory
     }
     private let appComponent: AppComponent
     init(appComponent: AppComponent) {
@@ -51,11 +67,18 @@ extension AppComponent: Registration {
     public func registerItems() {
 
         localTable["homeFactory-any HomeFactory"] = { [unowned self] in self.homeFactory as Any }
+        localTable["splashFactory-any SplashFactory"] = { [unowned self] in self.splashFactory as Any }
+    }
+}
+extension SplashComponent: Registration {
+    public func registerItems() {
+
     }
 }
 extension RootComponent: Registration {
     public func registerItems() {
         keyPathToName[\RootDependency.homeFactory] = "homeFactory-any HomeFactory"
+        keyPathToName[\RootDependency.splashFactory] = "splashFactory-any SplashFactory"
     }
 }
 extension HomeComponent: Registration {
@@ -80,6 +103,7 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
 
 @inline(never) private func register1() {
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
+    registerProviderFactory("^->AppComponent->SplashComponent", factoryace9f05f51d68f4c0677e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->HomeComponent", factory67229cdf0f755562b2b1e3b0c44298fc1c149afb)
 }

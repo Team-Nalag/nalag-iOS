@@ -8,7 +8,7 @@ let project = Project.module(
         .implements(
             module: .shared(.GlobalThirdPartyLibrary),
             product: .framework,
-            dependencies: 
+            dependencies:
                 [
                     .SPM.KeychainSwift,
                     .SPM.Moya,
