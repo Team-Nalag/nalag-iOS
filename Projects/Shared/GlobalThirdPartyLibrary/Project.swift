@@ -7,11 +7,12 @@ let project = Project.module(
     targets: [
         .implements(
             module: .shared(.GlobalThirdPartyLibrary),
-            product: .framework,
+            product: .staticFramework,
             dependencies:
                 [
                     .SPM.KeychainSwift,
                     .SPM.Moya,
+                    .SPM.CombineMoya,
                     .SPM.ComposableArchitecture,
                     .SPM.Needle
                 ]

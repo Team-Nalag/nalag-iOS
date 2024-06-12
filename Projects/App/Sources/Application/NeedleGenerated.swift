@@ -1,9 +1,14 @@
 
 
+import AddQuizFeature
+import AddQuizFeatureInterface
 import ComposableArchitecture
 import HomeFeature
 import HomeFeatureInterface
+import JwtStoreInterface
 import NeedleFoundation
+import QuizResolveFeature
+import QuizResolveFeatureInterface
 import RootFeature
 import RootFeatureInterface
 import SplashFeature
@@ -23,6 +28,17 @@ private func parent1(_ component: NeedleFoundation.Scope) -> NeedleFoundation.Sc
 
 #if !NEEDLE_DYNAMIC
 
+private class AddQuizDependency388662d86ab8b8bf6a49Provider: AddQuizDependency {
+
+
+    init() {
+
+    }
+}
+/// ^->AppComponent->AddQuizComponent
+private func factory5a83d66bace252942438e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return AddQuizDependency388662d86ab8b8bf6a49Provider()
+}
 private class SplashDependencye0cb7136f2ec3edfd60aProvider: SplashDependency {
 
 
@@ -33,6 +49,17 @@ private class SplashDependencye0cb7136f2ec3edfd60aProvider: SplashDependency {
 /// ^->AppComponent->SplashComponent
 private func factoryace9f05f51d68f4c0677e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
     return SplashDependencye0cb7136f2ec3edfd60aProvider()
+}
+private class QuizResolveDependency674e916aed3006babd96Provider: QuizResolveDependency {
+
+
+    init() {
+
+    }
+}
+/// ^->AppComponent->QuizResolveComponent
+private func factorye2552b98a0872927f159e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return QuizResolveDependency674e916aed3006babd96Provider()
 }
 private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
     var homeFactory: any HomeFactory {
@@ -51,26 +78,45 @@ private func factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5(_ component: Needle
     return RootDependency3944cc797a4a88956fb5Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class HomeDependency443c4e1871277bd8432aProvider: HomeDependency {
-
-
-    init() {
-
+    var quizResolveFactory: any QuizResolveFactory {
+        return appComponent.quizResolveFactory
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->HomeComponent
-private func factory67229cdf0f755562b2b1e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return HomeDependency443c4e1871277bd8432aProvider()
+private func factory67229cdf0f755562b2b1f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return HomeDependency443c4e1871277bd8432aProvider(appComponent: parent1(component) as! AppComponent)
 }
 
 #else
+extension JwtStoreComponent: Registration {
+    public func registerItems() {
+
+    }
+}
 extension AppComponent: Registration {
     public func registerItems() {
 
         localTable["homeFactory-any HomeFactory"] = { [unowned self] in self.homeFactory as Any }
         localTable["splashFactory-any SplashFactory"] = { [unowned self] in self.splashFactory as Any }
+        localTable["quizResolveFactory-any QuizResolveFactory"] = { [unowned self] in self.quizResolveFactory as Any }
+        localTable["addQuizFactory-any AddQuizFactory"] = { [unowned self] in self.addQuizFactory as Any }
+    }
+}
+extension AddQuizComponent: Registration {
+    public func registerItems() {
+
     }
 }
 extension SplashComponent: Registration {
+    public func registerItems() {
+
+    }
+}
+extension QuizResolveComponent: Registration {
     public func registerItems() {
 
     }
@@ -83,7 +129,7 @@ extension RootComponent: Registration {
 }
 extension HomeComponent: Registration {
     public func registerItems() {
-
+        keyPathToName[\HomeDependency.quizResolveFactory] = "quizResolveFactory-any QuizResolveFactory"
     }
 }
 
@@ -102,10 +148,13 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
 #if !NEEDLE_DYNAMIC
 
 @inline(never) private func register1() {
+    registerProviderFactory("^->JwtStoreComponent", factoryEmptyDependencyProvider)
     registerProviderFactory("^->AppComponent", factoryEmptyDependencyProvider)
+    registerProviderFactory("^->AppComponent->AddQuizComponent", factory5a83d66bace252942438e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->SplashComponent", factoryace9f05f51d68f4c0677e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->QuizResolveComponent", factorye2552b98a0872927f159e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5)
-    registerProviderFactory("^->AppComponent->HomeComponent", factory67229cdf0f755562b2b1e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->HomeComponent", factory67229cdf0f755562b2b1f47b58f8f304c97af4d5)
 }
 #endif
 

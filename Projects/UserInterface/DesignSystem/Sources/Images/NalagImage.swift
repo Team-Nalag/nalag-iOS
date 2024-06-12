@@ -4,6 +4,7 @@ public struct NalagImage: View {
     public enum Image {
         case logo
         case google
+        case mc
     }
 
     private var image: Image
@@ -30,6 +31,9 @@ public struct NalagImage: View {
 
         case .google:
             DesignSystemAsset.Images.google.swiftUIImage
+
+        case .mc:
+            DesignSystemAsset.Images.mc.swiftUIImage
         }
     }
 }

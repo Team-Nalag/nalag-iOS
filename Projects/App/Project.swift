@@ -30,8 +30,12 @@ let targets: [Target] = [
             .feature(target: .HomeFeature),
             .feature(target: .RootFeature),
             .feature(target: .SplashFeature),
-            .domain(target: .BaseDomain),
-            .core(target: .CoreKit)
+            .feature(target: .QuizResolveFeature),
+            .feature(target: .AddQuizFeature),
+            .domain(target: .UserDomain),
+            .core(target: .CoreKit),
+            .core(target: .Networking),
+            .core(target: .JwtStore)
         ],
         settings: .settings(base: env.baseSetting)
     )

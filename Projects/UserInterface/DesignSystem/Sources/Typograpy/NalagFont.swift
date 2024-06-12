@@ -8,14 +8,14 @@ public struct NalagFont: ViewModifier {
     init(size: CGFloat, weight: NalagFontWeight) {
         self.size = size
         self.weight = weight
-        self.lineHeight = weight.tenadaFont.font(size: size).lineHeight
+        self.lineHeight = weight.nalagFont.font(size: size).lineHeight
     }
 
     public func body(content: Content) -> some View {
         content
-            .font(weight.tenadaFont.swiftUIFont(size: size))
-            .lineSpacing(lineHeight * 1.5 - lineHeight)
-            .padding(.vertical, (lineHeight * 1.5 - lineHeight) / 2)
+            .font(weight.nalagFont.swiftUIFont(size: size))
+            .lineSpacing(lineHeight * 1.3 - lineHeight)
+            .padding(.vertical, (lineHeight * 1.3 - lineHeight) / 4)
     }
 }
 

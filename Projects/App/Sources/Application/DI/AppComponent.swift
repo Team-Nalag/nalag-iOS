@@ -1,4 +1,6 @@
 import NeedleFoundation
+import AddQuizFeature
+import AddQuizFeatureInterface
 import SwiftUI
 import RootFeature
 import RootFeatureInterface
@@ -6,6 +8,8 @@ import HomeFeature
 import HomeFeatureInterface
 import SplashFeature
 import SplashFeatureInterface
+import QuizResolveFeature
+import QuizResolveFeatureInterface
 
 public final class AppComponent: BootstrapComponent {
 //    private let _keychain: any Keychain
@@ -36,5 +40,13 @@ public extension AppComponent {
 
     var splashFactory: any SplashFactory {
         SplashComponent(parent: self)
+    }
+
+    var quizResolveFactory: any QuizResolveFactory {
+        QuizResolveComponent(parent: self)
+    }
+
+    var addQuizFactory: any AddQuizFactory {
+        AddQuizComponent(parent: self)
     }
 }

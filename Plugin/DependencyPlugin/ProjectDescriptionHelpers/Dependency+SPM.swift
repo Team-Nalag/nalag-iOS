@@ -11,7 +11,7 @@ public extension TargetDependency.SPM {
         name: "ComposableArchitecture"
     )
     static let Needle = TargetDependency.external(name: "NeedleFoundation")
+    static let CombineMoya = TargetDependency.external(name: "CombineMoya")
 }
 
-public extension Package {
-}
+public extension Package {}

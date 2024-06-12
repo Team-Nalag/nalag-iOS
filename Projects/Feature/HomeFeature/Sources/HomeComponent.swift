@@ -1,11 +1,17 @@
 import NeedleFoundation
 import SwiftUI
 import HomeFeatureInterface
+import QuizResolveFeatureInterface
 
-public protocol HomeDependency: Dependency {}
+public protocol HomeDependency: Dependency {
+    var quizResolveFactory: any QuizResolveFactory { get }
+}
 
 public final class HomeComponent: Component<HomeDependency>, HomeFactory {
     public func makeView() -> some View {
-        HomeView()
+        HomeView(
+            store: HomeStore(),
+            quizResolveFactory: dependency.quizResolveFactory
+        )
     }
 }

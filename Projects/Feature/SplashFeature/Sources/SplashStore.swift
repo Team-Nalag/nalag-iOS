@@ -1,10 +1,12 @@
 import ComposableArchitecture
+import Foundation
 import BaseFeature
 
 public struct SplashStore: Reducer {
     public struct State: Equatable {
         var isShowLoginButton: Bool = false
         var appState: SceneFlow = .splash
+        var githubOAuthUrl = URL(string: "http://localhost:8080/oauth2/authorization/github")!
     }
     public enum Action: FeatureAction, Equatable {
         case view(ViewAction)

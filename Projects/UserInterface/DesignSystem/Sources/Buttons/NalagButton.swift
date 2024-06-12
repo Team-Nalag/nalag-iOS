@@ -17,7 +17,7 @@ public struct NalagButton: View {
             VStack {
                 Rectangle().frame(height: 0)
                 Text(text)
-                    .nalagFont(20, weight: .extraBold, color: color.tint)
+                    .nalagFont(20, weight: .tenadaFont, color: color.tint)
             }
             .frame(height: 56)
             .background(color.back)
