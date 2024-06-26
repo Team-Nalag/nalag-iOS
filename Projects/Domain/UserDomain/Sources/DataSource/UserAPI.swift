@@ -1,6 +1,7 @@
 import Moya
+import UserDomainInterface
 import Foundation
-import NetworkingInterface
+import BaseDomainInterface
 
 public enum UserAPI {
     case generateToken(code: String)
@@ -18,11 +19,11 @@ extension UserAPI: NalagAPI {
     }
 
     public var method: Moya.Method {
-        return .post
+        return .get
     }
 
     public var domain: NalagDomain {
-        .user
+        .users
     }
 
     public var task: Task {

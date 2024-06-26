@@ -1,5 +1,5 @@
 import Foundation
 
 public protocol UserRepository {
-    func generateToken(code: Data) async throws
+    func generateToken(code: String) async throws
 }

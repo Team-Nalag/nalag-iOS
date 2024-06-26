@@ -29,7 +29,7 @@ public struct SplashView: View {
             if viewStore.isShowLoginButton {
                 Link(destination: viewStore.githubOAuthUrl) {
                     HStack(spacing: 30) {
-                        NalagImage(.google)
+                        NalagImage(.github)
                             .frame(width: 24, height: 24)
                         Text("Use Github Account")
                             .nalagFont(14, weight: .pretendard(.semiBold), color: .gray)
@@ -42,26 +42,26 @@ public struct SplashView: View {
             Spacer()
        }
         .onAppear {
-            self.viewStore.publisher
-                .subscribe(on: RunLoop.main)
-                .delay(for: .seconds(1), scheduler: RunLoop.main)
-                .first()
-                .sink(receiveValue: { _ in
-                    viewStore.send(.viewAppear, animation: .easeIn)
-                })
-                .cancel()
+            viewStore.publisher
+                    .subscribe(on: RunLoop.main)
+                    .delay(for: .seconds(1), scheduler: RunLoop.main)
+                    .first()
+                    .sink(receiveValue: { _ in
+                        viewStore.send(.viewAppear, animation: .easeIn)
+                    })
+                    .cancel()
         }
         .onChange(of: self.viewStore.appState) {
             self.appState.sceneFlow = $0
         }
         .onOpenURL(perform: { url in
-            print(url.getAccessToken())
+            self.viewStore.send(.generateToken(code: url.getCode()))
         })
     }
 }
 
 extension URL {
-    func getAccessToken() -> String {
+    func getCode() -> String {
         let code = self.absoluteString.components(separatedBy: "code=").last ?? ""
         return code.components(separatedBy: "&state=").first ?? ""
     }

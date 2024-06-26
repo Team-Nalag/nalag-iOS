@@ -12,7 +12,7 @@ let project = Project.module(
                 [
                     .SPM.KeychainSwift,
                     .SPM.Moya,
-                    .SPM.CombineMoya,
+                    .SPM.Kingfisher,
                     .SPM.ComposableArchitecture,
                     .SPM.Needle
                 ]

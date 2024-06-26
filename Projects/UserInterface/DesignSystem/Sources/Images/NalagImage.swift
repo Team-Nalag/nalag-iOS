@@ -5,6 +5,8 @@ public struct NalagImage: View {
         case logo
         case google
         case mc
+        case github
+        case defaultImage
     }
 
     private var image: Image
@@ -34,6 +36,12 @@ public struct NalagImage: View {
 
         case .mc:
             DesignSystemAsset.Images.mc.swiftUIImage
+
+        case .github:
+            DesignSystemAsset.Images.github.swiftUIImage
+
+        case .defaultImage:
+            DesignSystemAsset.Images.defaultImage.swiftUIImage
         }
     }
 }

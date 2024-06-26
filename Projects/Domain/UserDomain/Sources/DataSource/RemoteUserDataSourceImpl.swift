@@ -1,14 +1,15 @@
 import Foundation
-import NetworkingInterface
+import UserDomainInterface
+import BaseDomainInterface
 
-final class RemoteUserDataSourceImpl: RemoteUserDataSource {
+public final class RemoteUserDataSourceImpl: RemoteUserDataSource {
     private let networking: any Networking
 
-    init(networking: any Networking) {
+    public init(networking: any Networking) {
         self.networking = networking
     }
 
-    func generateToken(code: String) async throws {
-        try await networking.request()
+    public func generateToken(code: String) async throws {
+        try await networking.request(UserAPI.generateToken(code: code))
     }
 }

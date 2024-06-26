@@ -24,6 +24,7 @@ extension ModulePaths: MicroTargetPathConvertable {
 
 public extension ModulePaths {
     enum Feature: String, MicroTargetPathConvertable {
+        case MakeQuizFeature
         case AddQuizFeature
         case QuizResolveFeature
         case SplashFeature
@@ -35,6 +36,8 @@ public extension ModulePaths {
 
 public extension ModulePaths {
     enum Domain: String, MicroTargetPathConvertable {
+        case AnswersDomain
+        case QuizzesDomain
         case UserDomain
         case BaseDomain
     }
@@ -43,7 +46,6 @@ public extension ModulePaths {
 public extension ModulePaths {
     enum Core: String, MicroTargetPathConvertable {
         case JwtStore
-        case Networking
         case CoreKit
     }
 }

@@ -1,4 +1,9 @@
 import NeedleFoundation
+import BaseDomain
+import BaseDomainInterface
+import Moya
+import JwtStore
+import JwtStoreInterface
 import AddQuizFeature
 import AddQuizFeatureInterface
 import SwiftUI
@@ -10,26 +15,29 @@ import SplashFeature
 import SplashFeatureInterface
 import QuizResolveFeature
 import QuizResolveFeatureInterface
+import MakeQuizFeature
+import MakeQuizFeatureInterface
 
 public final class AppComponent: BootstrapComponent {
-//    private let _keychain: any Keychain
-//
-//    init(keychain: any Keychain) {
-//        self._keychain = keychain
-//    }
-
+    
     public func makeRootView() -> some View {
         rootComponent.makeView()
     }
-
-//    public var keychain: any Keychain {
-//        shared {
-//            _keychain
-//        }
-//    }
-
+    
     var rootComponent: RootComponent {
         RootComponent(parent: self)
+    }
+    
+    var jwtStore: any JwtStore {
+        shared {
+            JwtStoreImpl()
+        }
+    }
+
+    var networking: any Networking {
+        shared {
+            NetworkingImpl(jwtStore: jwtStore)
+        }
     }
 }
 
@@ -48,5 +56,9 @@ public extension AppComponent {
 
     var addQuizFactory: any AddQuizFactory {
         AddQuizComponent(parent: self)
+    }
+
+    var makeQuizFactory: any MakeQuizFactory {
+        MakeQuizComponent(parent: self)
     }
 }

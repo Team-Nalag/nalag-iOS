@@ -1,8 +1,16 @@
 import ComposableArchitecture
 import Foundation
 import BaseFeature
+import UserDomainInterface
+import Combine
 
 public struct SplashStore: Reducer {
+    private let generateTokenUseCase: any GenerateTokenUseCase
+
+    public init(generateTokenUseCase: any GenerateTokenUseCase) {
+        self.generateTokenUseCase = generateTokenUseCase
+    }
+
     public struct State: Equatable {
         var isShowLoginButton: Bool = false
         var appState: SceneFlow = .splash
@@ -19,6 +27,7 @@ public struct SplashStore: Reducer {
     public enum ViewAction: Equatable {
         case viewAppear
         case loginButtonDidTap
+        case generateToken(code: String)
     }
 
     public enum AsyncAction: Equatable {}
@@ -40,6 +49,12 @@ public struct SplashStore: Reducer {
             case .loginButtonDidTap:
                 state.appState = .home
                 return .none
+
+            case let .generateToken(code):
+                return .run(operation: { send in
+                    try await generateTokenUseCase.execute(code: code)
+                    await send(.view(.loginButtonDidTap))
+                })
             }
         default:
             return .none

@@ -20,6 +20,10 @@ let dependencies = Dependencies(
             .remote(
                 url: "https://github.com/pointfreeco/swift-composable-architecture",
                 requirement: .upToNextMajor(from: "1.10.0")
+            ),
+            .remote(
+                url: "https://github.com/onevcat/Kingfisher",
+                requirement: .upToNextMajor(from: "7.0.0")
             )
         ],
         baseSettings: .settings(

@@ -32,10 +32,12 @@ let targets: [Target] = [
             .feature(target: .SplashFeature),
             .feature(target: .QuizResolveFeature),
             .feature(target: .AddQuizFeature),
+            .feature(target: .MakeQuizFeature),
             .domain(target: .UserDomain),
-            .core(target: .CoreKit),
-            .core(target: .Networking),
-            .core(target: .JwtStore)
+            .domain(target: .QuizzesDomain),
+            .domain(target: .AnswersDomain),
+            .core(target: .JwtStore),
+            .core(target: .CoreKit)
         ],
         settings: .settings(base: env.baseSetting)
     )
